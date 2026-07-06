@@ -1,10 +1,16 @@
 class Solution {
-    public String longestCommonPrefix(String[] strs) {
-        for(int i=0;i<strs[0].length();i++){
-          for(String s:strs){
-            if(i==s.length()||s.charAt(i)!=strs[0].charAt(i)) return s.substring(0,i);
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,ArrayList<String>> res=new HashMap<>();
+       
+        for(String s:strs){
+           int[]count=new int[26];
+          for(char c:s.toCharArray()){
+            count[c - 'a']++;
           }
+          String key=Arrays.toString(count);
+          res.putIfAbsent(key,new ArrayList<>());
+          res.get(key).add(s);
         }
-        return strs[0];
+        return new ArrayList<>(res.values());
     }
 }
